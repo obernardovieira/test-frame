@@ -45,7 +45,7 @@ app.frame("/", (c) => {
         <div
           style={{
             color: "white",
-            fontSize: 60,
+            fontSize: 20,
             fontStyle: "normal",
             letterSpacing: "-0.025em",
             lineHeight: 1.4,
