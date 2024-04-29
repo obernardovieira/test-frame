@@ -59,7 +59,7 @@ app.frame("/", (c) => {
             : "Welcome!" +
               (verified ? "verified " : "not-verified ") +
               (c.var.interactor
-                ? c.var.interactor.custodyAddress
+                ? (c.var.interactor as any).custodyAddress
                 : "no-address")}
         </div>
       </div>
