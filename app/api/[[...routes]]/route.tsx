@@ -13,7 +13,7 @@ const app = new Frog({
   hub:
     process.env.NODE_ENV !== "production"
       ? undefined
-      : neynar({ apiKey: "NEYNAR_FROG_FM" }),
+      : neynar({ apiKey: process.env.NEXT_PUBLIC_NEYNAR_API! }),
 });
 
 // Uncomment to use Edge Runtime
