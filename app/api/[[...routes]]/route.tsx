@@ -2,7 +2,8 @@
 
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
-import { neynar } from "frog/hubs";
+// import { neynar } from "frog/hubs";
+import { neynar } from "frog/middlewares";
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 
@@ -10,19 +11,26 @@ const app = new Frog({
   assetsPath: "/",
   basePath: "/api",
   // Supply a Hub to enable frame verification.
-  hub:
-    process.env.NODE_ENV !== "production"
-      ? undefined
-      : neynar({ apiKey: process.env.NEXT_PUBLIC_NEYNAR_API! }),
+  // hub:
+  //   process.env.NODE_ENV !== "production"
+  //     ? undefined
+  //     : neynar({ apiKey: process.env.NEXT_PUBLIC_NEYNAR_API! }),
 });
 
 // Uncomment to use Edge Runtime
 // export const runtime = 'edge'
 
+app.use(
+  neynar({
+    apiKey: process.env.NEXT_PUBLIC_NEYNAR_API!,
+    features: ["interactor", "cast"],
+  })
+);
+
 app.frame("/", (c) => {
   const { buttonValue, inputText, status, frameData, verified } = c;
   const fruit = inputText || buttonValue;
-  console.log("frameData", frameData, verified);
+  console.log("frameData", frameData, verified, c.var);
   return c.res({
     image: (
       <div
