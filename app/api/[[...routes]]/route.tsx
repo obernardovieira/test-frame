@@ -58,8 +58,8 @@ app.frame("/", (c) => {
             ? `Nice choice.${fruit ? ` ${fruit.toUpperCase()}!!` : ""}`
             : "Welcome!" +
               (verified ? "verified " : "not-verified ") +
-              (frameData && frameData.address
-                ? frameData.address
+              (c.var.interactor
+                ? c.var.interactor.custodyAddress
                 : "no-address")}
         </div>
       </div>
